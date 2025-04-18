@@ -1,3 +1,14 @@
+
+window.addEventListener('load', resizeCanvas);
+window.addEventListener('resize', resizeCanvas);
+
+function resizeCanvas() {
+  const img = document.getElementById('mapImage');
+  const canvas = document.getElementById('mapCanvas');
+  canvas.width = img.clientWidth;
+  canvas.height = img.clientHeight;
+}
+
 const canvas = document.getElementById('mapCanvas');
 const ctx = canvas.getContext('2d');
 
