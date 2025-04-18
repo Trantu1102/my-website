@@ -54,3 +54,10 @@
     border: none;
     border-top: 1px solid #ccc;
 }
+
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+        font-size: 14px;
+    }
+}
