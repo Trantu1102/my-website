@@ -1,4 +1,3 @@
-
 const canvas = document.getElementById('mapCanvas');
 const ctx = canvas.getContext('2d');
 
@@ -30,31 +29,46 @@ fetch('provinces.json')
             return { coords, shape };
         });
         createMapAreas();
-        setupEventListeners();
     })
     .catch(error => {
         console.error('Error loading the JSON file:', error);
     });
 
 function createMapAreas() {
-    if (areas) {
-        areas.forEach((area) => {
-            const areaElement = document.createElement('area');
-            areaElement.setAttribute('shape', area.shape);
-            areaElement.setAttribute('coords', area.coords);
-            areaElement.setAttribute('href', 'javascript:void(0)'); // thêm href để kích hoạt các sự kiện
-            mapElement.appendChild(areaElement);
+    // Xoá nội dung cũ
+    mapElement.innerHTML = '';
+    areas.forEach((area) => {
+        const scaleX = img.clientWidth / img.naturalWidth;
+        const scaleY = img.clientHeight / img.naturalHeight;
+        const scaledCoords = area.coords.map((val, index) => {
+            return index % 2 === 0 ? Math.round(val * scaleX) : Math.round(val * scaleY);
         });
-    }
+        const areaElement = document.createElement('area');
+        areaElement.setAttribute('shape', area.shape);
+        areaElement.setAttribute('coords', scaledCoords.join(','));
+        areaElement.setAttribute('href', 'javascript:void(0)');
+        mapElement.appendChild(areaElement);
+    });
+    setupEventListeners();
 }
 
+// Cập nhật kích thước canvas và các vùng map khi cửa sổ thay đổi
+window.addEventListener('resize', () => {
+    canvas.width = img.clientWidth;
+    canvas.height = img.clientHeight;
+    createMapAreas();
+});
+
 const drawOutline = (coords) => {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.beginPath();
-    ctx.moveTo(coords[0], coords[1]);
+    const scaleX = canvas.width / img.naturalWidth;
+    const scaleY = canvas.height / img.naturalHeight;
+    ctx.moveTo(coords[0] * scaleX, coords[1] * scaleY);
     for (let i = 2; i < coords.length; i += 2) {
-        ctx.lineTo(coords[i], coords[i + 1]);
-    }
+    ctx.lineTo(coords[i] * scaleX, coords[i + 1] * scaleY);
+}
+    
     ctx.closePath();
     ctx.strokeStyle = 'red';
     ctx.lineWidth = 2;
