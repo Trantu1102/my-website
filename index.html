@@ -4,14 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Map of Vietnam</title>
-    <link rel="stylesheet" href="style.css" />
-    <script src="script.js" defer></script>
+    <!-- Thêm base URL cho GitHub Pages -->
+    <base href="./" />
+    <link rel="stylesheet" href="./style.css" />
+    <script src="./script.js" defer></script>
   </head>
 
   <body>
     <div class="container">
       <div class="map-container">
-        <img src="vietnam_map.jfif" usemap="#image-map" alt="Vietnam Map" />
+        <!-- Sửa path ảnh -->
+        <img src="./vietnam_map.jfif" usemap="#image-map" alt="Vietnam Map" />
         <canvas id="mapCanvas"></canvas>
         <map name="image-map" id="vietnam-map"> </map>
       </div>
