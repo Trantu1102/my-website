@@ -1,19 +1,36 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+.container {
+    padding: 10px;
+}
+
 .map-container {
     position: relative;
 }
 
 .map-container img {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, 0%);
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+#mapImage {
+    width: 100%;
+    height: auto;
+    display: block;
 }
 
 #mapCanvas {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, 0%);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
     pointer-events: none;
 }
 
