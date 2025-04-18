@@ -78,16 +78,23 @@ function createMapAreas() {
 }
 
 const drawOutline = (coords) => {
-ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.beginPath();
     const scaleX = canvas.width / img.naturalWidth;
     const scaleY = canvas.height / img.naturalHeight;
+    
     ctx.moveTo(coords[0] * scaleX, coords[1] * scaleY);
     for (let i = 2; i < coords.length; i += 2) {
-    ctx.lineTo(coords[i] * scaleX, coords[i + 1] * scaleY);
-}
+        ctx.lineTo(coords[i] * scaleX, coords[i + 1] * scaleY);
+    }
     
     ctx.closePath();
+    
+    // Thêm fill màu da cam nhạt
+    ctx.fillStyle = 'rgba(255, 165, 0, 0.3)'; // Màu da cam với độ trong suốt 0.3
+    ctx.fill();
+    
+    // Vẽ viền đỏ
     ctx.strokeStyle = 'red';
     ctx.lineWidth = 2;
     ctx.stroke();
