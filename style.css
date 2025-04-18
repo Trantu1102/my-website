@@ -1,15 +1,17 @@
 .container {
     width: 100%;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    /* Thay đổi từ row sang column */
     align-items: center;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
 .map-container {
-    position: relative;
     width: 100%;
-    max-width: 1000px;
-    /* hoặc kích thước tối đa mong muốn */
+    position: relative;
     margin: 0 auto;
 }
 
@@ -84,8 +86,50 @@
     border-top: 1px solid #ccc;
 }
 
+.instruction-banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff5f0;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.instruction-banner img {
+    width: 30px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.instruction-banner p {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 16px;
+    color: #333;
+}
+
+.explanation-text {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 30px;
+    font-family: 'Segoe UI', sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+.explanation-text p {
+    margin: 8px 0;
+    font-size: 16px;
+}
+
 /* Media queries cho điện thoại */
 @media screen and (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
     .tooltip-box {
         width: 85vw;
         /* Giảm xuống để phù hợp với màn hình điện thoại */
@@ -117,6 +161,29 @@
 
     .tooltip-box .highlight {
         font-size: 13px;
+    }
+
+    .instruction-banner {
+        padding: 8px;
+        margin-bottom: 15px;
+    }
+
+    .instruction-banner img {
+        width: 24px;
+    }
+
+    .instruction-banner p {
+        font-size: 14px;
+    }
+
+    .explanation-text {
+        margin-bottom: 20px;
+        padding: 0 15px;
+    }
+
+    .explanation-text p {
+        font-size: 14px;
+        line-height: 1.4;
     }
 }
 

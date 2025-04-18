@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Map of Vietnam</title>
-    <!-- Thêm base URL cho GitHub Pages -->
     <base href="./" />
     <link rel="stylesheet" href="./style.css" />
     <script src="./script.js" defer></script>
@@ -12,8 +11,36 @@
 
   <body>
     <div class="container">
+      <div class="explanation-text">
+        <p>
+          Trong đó, TPHCM được mở rộng bao gồm cả tỉnh Bình Dương, Bà Rịa - Vũng
+          Tàu có trung tâm hành chính tại TPHCM.
+        </p>
+        <p>Hải Dương sáp nhập với Hải Phòng, thủ phủ đặt ở Hải Phòng.</p>
+        <p>
+          Quảng Nam về chung "một nhà" với Đà Nẵng có trụ sở hành chính tại Đà
+          Nẵng.
+        </p>
+        <p>Thái Bình nhập với Hưng Yên có cơ quan đầu não tại Hưng Yên.</p>
+        <p>
+          Nam Định, Hà Nam, Ninh Bình sáp nhập thành tỉnh Ninh Bình có trụ sở
+          hành chính tại Ninh Bình.
+        </p>
+        <p>
+          Hà Nội, Thanh Hóa, Nghệ An, Hà Tĩnh, Huế,... được giữ nguyên trạng.
+        </p>
+      </div>
+
+      <div class="instruction-banner">
+        <img
+          src="./instruction-icon.png"
+          alt="Instruction Icon"
+          class="instruction-icon"
+        />
+        <p>Mời độc giả nhấn vào từng địa phương để xem thông tin chi tiết</p>
+      </div>
+
       <div class="map-container">
-        <!-- Sửa path ảnh -->
         <img src="./vietnam_map.jfif" usemap="#image-map" alt="Vietnam Map" />
         <canvas id="mapCanvas"></canvas>
         <map name="image-map" id="vietnam-map"> </map>
