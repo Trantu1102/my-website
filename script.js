@@ -160,10 +160,56 @@ const showTooltip = (data, event) => {
         `;
     }
 
+    // Hiện tooltip trước để lấy kích thước thực
+    tooltip.style.visibility = 'hidden';
+    tooltip.style.display = 'block';
+
+    const tooltipWidth = tooltip.offsetWidth;
+    const tooltipHeight = tooltip.offsetHeight;
+    
+    // Lấy kích thước và vị trí của viewport
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+
+    // Tính toán vị trí tốt nhất cho tooltip
+    let left = event.pageX + 10;
+    let top = event.pageY + 10;
+
+    // Kiểm tra và điều chỉnh vị trí ngang
+    if (left + tooltipWidth > viewportWidth + scrollLeft) {
+        left = event.pageX - tooltipWidth - 10;
+    }
+
+    // Kiểm tra và điều chỉnh vị trí dọc
+    if (top + tooltipHeight > viewportHeight + scrollTop) {
+        top = event.pageY - tooltipHeight - 10;
+        
+        // Nếu vẫn vượt quá phía trên viewport
+        if (top < scrollTop) {
+            // Đặt tooltip ở giữa màn hình theo chiều dọc
+            top = scrollTop + (viewportHeight - tooltipHeight) / 2;
+        }
+    }
+
+    // Đảm bảo tooltip không bị cắt ở các cạnh
+    left = Math.max(scrollLeft + 10, Math.min(left, viewportWidth + scrollLeft - tooltipWidth - 10));
+    top = Math.max(scrollTop + 10, Math.min(top, viewportHeight + scrollTop - tooltipHeight - 10));
+
+    // Áp dụng vị trí và hiện tooltip
+    tooltip.style.left = `${left}px`;
+    tooltip.style.top = `${top}px`;
+    tooltip.style.visibility = 'visible';
     tooltip.classList.add('active');
-    tooltip.style.left = `${event.pageX + 10}px`;
-    tooltip.style.top = `${event.pageY + 10}px`;
 };
+
+// Thêm event listener cho viewport resize
+window.addEventListener('resize', () => {
+    if (tooltip.classList.contains('active')) {
+        tooltip.classList.remove('active');
+    }
+});
 
 const hideTooltip = () => {
     tooltip.classList.remove('active');
@@ -180,8 +226,17 @@ function setupEventListeners() {
             showTooltip(locationsData[index], event);
         });
         area.addEventListener('mousemove', (event) => {
-            tooltip.style.left = `${event.pageX + 10}px`;
-            tooltip.style.top = `${event.pageY + 10}px`;
+            // Chỉ cập nhật vị trí nếu tooltip không bị overflow
+            const tooltipRect = tooltip.getBoundingClientRect();
+            const viewportHeight = window.innerHeight;
+            const viewportWidth = window.innerWidth;
+            
+            // Chỉ di chuyển tooltip theo chuột khi có đủ không gian
+            if (tooltipRect.width + event.clientX < viewportWidth &&
+                tooltipRect.height + event.clientY < viewportHeight) {
+                tooltip.style.left = `${event.pageX + 10}px`;
+                tooltip.style.top = `${event.pageY + 10}px`;
+            }
         });
         area.addEventListener('mouseleave', hideTooltip);
     });

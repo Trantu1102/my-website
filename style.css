@@ -41,7 +41,12 @@
 }
 
 .tooltip-box {
-    width: 350px;
+    width: 30vw;
+    /* Thay đổi từ width cố định sang tương đối */
+    min-width: 200px;
+    /* Đảm bảo không quá nhỏ trên mobile */
+    max-width: 350px;
+    /* Giới hạn kích thước tối đa */
     background-color: #f0f8ff;
     opacity: 0.9;
     border-radius: 12px;
@@ -53,6 +58,13 @@
     position: absolute;
     text-align: center;
     z-index: 1000;
+    transition: left 0.1s ease-out, top 0.1s ease-out;
+    pointer-events: none;
+    /* Để tránh tooltip che phủ các vùng hover */
+    max-height: 80vh;
+    /* Giới hạn chiều cao tối đa */
+    overflow-y: auto;
+    /* Cho phép cuộn nếu nội dung quá dài */
 }
 
 .tooltip-box.active {
@@ -76,4 +88,21 @@
     margin: 20px 0;
     border: none;
     border-top: 1px solid #ccc;
+}
+
+/* Thêm media queries cho responsive */
+@media screen and (max-width: 768px) {
+    .tooltip-box {
+        width: 80vw;
+        font-size: 14px;
+        max-height: 60vh;
+    }
+
+    .tooltip-box h2 {
+        font-size: 18px;
+    }
+
+    .tooltip-box .highlight {
+        font-size: 14px;
+    }
 }
