@@ -34,30 +34,48 @@ fetch('provinces.json')
         console.error('Error loading the JSON file:', error);
     });
 
+function updateCanvasSize() {
+    // Cập nhật kích thước canvas theo kích thước thực của ảnh
+    canvas.width = img.offsetWidth;
+    canvas.height = img.offsetHeight;
+    canvas.style.width = `${img.offsetWidth}px`;
+    canvas.style.height = `${img.offsetHeight}px`;
+}
+
+// Sửa lại event listener resize
+window.addEventListener('resize', () => {
+    updateCanvasSize();
+    createMapAreas();
+});
+
+// Thêm vào sau khi ảnh đã load
+img.addEventListener('load', () => {
+    updateCanvasSize();
+    createMapAreas();
+});
+
+// Sửa lại hàm createMapAreas
 function createMapAreas() {
-    // Xoá nội dung cũ
     mapElement.innerHTML = '';
+    const scaleX = img.offsetWidth / img.naturalWidth;
+    const scaleY = img.offsetHeight / img.naturalHeight;
+    
     areas.forEach((area) => {
-        const scaleX = img.clientWidth / img.naturalWidth;
-        const scaleY = img.clientHeight / img.naturalHeight;
         const scaledCoords = area.coords.map((val, index) => {
-            return index % 2 === 0 ? Math.round(val * scaleX) : Math.round(val * scaleY);
+            return index % 2 === 0 
+                ? Math.round(val * scaleX) 
+                : Math.round(val * scaleY);
         });
+        
         const areaElement = document.createElement('area');
         areaElement.setAttribute('shape', area.shape);
         areaElement.setAttribute('coords', scaledCoords.join(','));
         areaElement.setAttribute('href', 'javascript:void(0)');
         mapElement.appendChild(areaElement);
     });
+    
     setupEventListeners();
 }
-
-// Cập nhật kích thước canvas và các vùng map khi cửa sổ thay đổi
-window.addEventListener('resize', () => {
-    canvas.width = img.clientWidth;
-    canvas.height = img.clientHeight;
-    createMapAreas();
-});
 
 const drawOutline = (coords) => {
 ctx.clearRect(0, 0, canvas.width, canvas.height);
