@@ -98,9 +98,9 @@
 }
 
 .instruction-banner img {
-    width: 30px;
+    width: 40px;
     height: auto;
-    margin-right: 10px;
+    margin-left: 10px;
 }
 
 .instruction-banner p {
@@ -122,6 +122,32 @@
 .explanation-text p {
     margin: 8px 0;
     font-size: 16px;
+}
+
+.map-instruction {
+    background-color: #fff5f0;
+    padding: 8px 15px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    white-space: nowrap;
+}
+
+.map-instruction img {
+    width: 20px;
+    height: auto;
+}
+
+.map-instruction p {
+    margin: 0;
+    font-size: 14px;
+    color: #333;
 }
 
 /* Media queries cho điện thoại */
@@ -184,6 +210,15 @@
     .explanation-text p {
         font-size: 14px;
         line-height: 1.4;
+    }
+
+    .map-instruction {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+
+    .map-instruction img {
+        width: 16px;
     }
 }
 
