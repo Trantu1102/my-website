@@ -1,0 +1,56 @@
+.map-container {
+    position: relative;
+}
+
+.map-container img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+}
+
+#mapCanvas {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    pointer-events: none;
+}
+
+.tooltip-box {
+    width: 350px;
+    background-color: #f0f8ff;
+    opacity: 0.9;
+    border-radius: 12px;
+    padding: 10px;
+    font-family: 'Segoe UI', sans-serif;
+    color: #1a1a1a;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: none;
+    position: absolute;
+    text-align: center;
+    z-index: 1000;
+}
+
+.tooltip-box.active {
+    display: block !important;
+}
+
+.tooltip-box h2 {
+    text-align: center;
+    color: #2b55b4;
+    font-size: 25px;
+    margin-bottom: 20px;
+}
+
+.tooltip-box .highlight {
+    color: #2b55b4;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.tooltip-box hr {
+    margin: 20px 0;
+    border: none;
+    border-top: 1px solid #ccc;
+}
